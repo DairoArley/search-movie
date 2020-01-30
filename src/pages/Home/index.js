@@ -15,7 +15,7 @@ export default ({history}) => {
 		setSerchText("");
 	};
 	const handleFindTextClick = event => {
-		history.push(`/result?movieName=${serchText}`);
+		history.push(`/results?movieName=${serchText}`);
 	};
 	return (
 		<Container className={classes.container}>

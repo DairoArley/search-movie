@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const baseURL = 'https://www.omdapi.com/?apiKey=ff0c3a5';
+const keyOMBD ='c36362ed'; 
+
+const baseURL = 'http://www.omdbapi.com/?apikey=c36362ed'
 
 export const apiCall = (url, data, headers, method) => axios({
     method, 
