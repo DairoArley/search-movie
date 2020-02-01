@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, {useState} from'react';
+import {Container, Typography, Card, Grid, TextField, Button} from '@material-ui/core';
 
-import { getDemoRequest } from '../../redux/actions/demoActions';
+import styles from './style';
+import MovieIcon  from '../../icons/MovieIcon';
+import TvIcon from '../../icons/TvIcon';
 
-import User from '../../components/User';
-
-class Home extends Component {
-	componentWillMount() {
-		this.props.getDemoRequest('hey');
-	}
-	render() {
-		const { users } = this.props;
-
-		let items = [];
-		if (typeof users !== 'undefined') {
-			items = users.map((value, index) => {
-				return <User key={index} {...value} />;
-			});
-		}
-		return <div>{items}</div>;
-	}
+export default ({history}) => {
+	const [serchText, setSerchText] = useState('');
+	const classes = styles();
+	const handleSearchTextChange = event => {
+		setSerchText(event.target.value);
+	};
+	const handleCleanTextClick = event => {
+		setSerchText("");
+	};
+	const handleFindTextClick = event => {
+		history.push(`/results?movieName=${serchText}`);
+	};
+	return (
+		<Container className={classes.container}>
+			<Card className={classes.cardContainer}>
+				<Grid container className={classes.titleContainer}>
+					<Grid>
+						<TvIcon className= {classes.movieIcon}/>
+					</Grid>
+					<Grid>
+						<Typography className={classes.title}>Bienvenidos</Typography>
+					</Grid>
+					<Grid>
+						<MovieIcon className={classes.movieIcon}/>
+					</Grid>
+				</Grid>
+				<TextField value={serchText}
+				placeholder="Buscar..." 
+				className={classes.TextFieldSearch}
+				onChange={handleSearchTextChange}/>
+				<Grid className={classes.buttonContainer}>
+					<Button variant= "contained" onClick={handleCleanTextClick}>Limpiar</Button>
+					<Button variant= "contained"  className={classes.serchButton} color="primary" size="large" onClick={handleFindTextClick}>Buscar</Button>
+				</Grid>					
+			</Card>
+		</Container>		
+	);
 }
-
-const mapDispatchToProps = (dispatch, props) => {
-	return {
-		getDemoRequest: payload => {
-			dispatch(getDemoRequest(payload));
-		}
-	};
-};
-const mapStateToProps = state => {
-	return {
-		users: state.demoReducer[0]
-	};
-};
-
-Home.propTypes = {
-	dispatch: PropTypes.func
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
