@@ -16,7 +16,8 @@ export default ({location}) => {
 
     useEffect( () => {
         const { movieName } = queryString.parse(location.search);
-        if(movieName && !movies){
+        if(movieName && !isLooked){
+            setIsLooked(true);
             dispatch(searchMovie({movieName}));
         }
         
