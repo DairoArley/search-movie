@@ -3,7 +3,7 @@ import {Container, Typography, Card, Grid, TextField, Button} from '@material-ui
 
 import styles from './style';
 import MovieIcon  from '../../icons/MovieIcon';
-import TvIcon from '../../icons/TvIcon';
+
 
 export default ({history}) => {
 	const [serchText, setSerchText] = useState('');
@@ -22,7 +22,7 @@ export default ({history}) => {
 			<Card className={classes.cardContainer}>
 				<Grid container className={classes.titleContainer}>
 					<Grid>
-						<TvIcon className= {classes.movieIcon}/>
+						<MovieIcon className= {classes.movieIcon}/>
 					</Grid>
 					<Grid>
 						<Typography className={classes.title}>Bienvenidos</Typography>
@@ -34,6 +34,7 @@ export default ({history}) => {
 				<TextField value={serchText}
 				placeholder="Buscar..." 
 				className={classes.TextFieldSearch}
+				required = {true}
 				onChange={handleSearchTextChange}/>
 				<Grid className={classes.buttonContainer}>
 					<Button variant= "contained" onClick={handleCleanTextClick}>Limpiar</Button>
